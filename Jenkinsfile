@@ -1,7 +1,7 @@
 pipeline{
   agent any  
   stages {
-   stage("Opening"){
+    stage("Opening"){
          steps{
             //Welcome message
             script{
@@ -10,14 +10,8 @@ pipeline{
 }
 }
 
-   stage("Workspace_cleanup"){
-        //Cleaning WorkSpace
-        steps{
-            step([$class: 'WsCleanup'])
-}
-}
-
-   stage("Repo_clone"){
+   
+    stage("Repo_clone"){
        //Clone repo from GitHub
       steps {
          checkout ([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[credentialsId: 'instance_id', url: 'git@github.com:shubh9975/pipeline.git']]])
@@ -25,7 +19,7 @@ pipeline{
 }
 }
 
-   stage("terraform_init"){
+    stage("terraform_init"){
      //terraform init
      steps{
       script{
@@ -35,7 +29,7 @@ pipeline{
 }
 
    
-   stage("static_analysis"){
+    stage("static_analysis"){
      //static analysis
       steps{
        script{
@@ -48,7 +42,7 @@ pipeline{
 }
 }   
 
-   stage("terraform_plan"){
+    stage("terraform_plan"){
      //terraform plan
       steps{
        script{
@@ -61,7 +55,7 @@ pipeline{
 }
 }
  
-   stage("terraform_apply"){
+    stage("terraform_apply"){
     //terraform apply
      steps{
       script{
@@ -74,4 +68,5 @@ pipeline{
 }
 }
 
-
+}
+}
